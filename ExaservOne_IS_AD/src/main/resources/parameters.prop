@@ -1,11 +1,12 @@
 #Parameter data and values
-#Fri Feb 23 10:43:14 CET 2018
+#Fri Feb 23 14:21:50 CET 2018
 SFTP_Address=sftp.example.com
 SFTP_Timeout=10000
 AD_Webservice_Address=https\://example.com
 AD_Webservice_Timeout=60000
 Simulation_Enddate_ext=
-SuccessFactors_Address=https\://api8preview.sapsf.com
+CompoundEmployee_Entities=person, email_information, personal_information, employment_information, job_information, workOrder
+SuccessFactors_Address=https\://api4preview.sapsf.com
 How_To_Send_To_AD_ext=sftp
 Mail_Subject=Employee data warnings
 Company_Territory_Code_ext=
@@ -19,13 +20,12 @@ Mail_Host=smtp.office365.com
 Simulation_Startdate_ext=
 File_Enryption_Mode_ext=
 Mail_Credential=SMTP_Exaserv_Support
-AD_Webservice_Credential=<<credential>>
+AD_Webservice_Credential=SFTP_Exaserv
 Operating_Unit_ext=
-Initial_Timestamp_ext=2017-01-01T00\:00\:00
+Initial_Timestamp_ext=2017-01-01T00\:00\:00Z
 Mail_From=exaservsupport@exaserv.com
 Person_Id_External_ext=
-SFTP_Credential=<<credential>>
-SuccessFactors_Query_Fields_sfapi=
+SFTP_Credential=SFTP_Exaserv
 Include_ContingentWorkers_ext=yes
 Mail_BCC=
 SFTP_Reconnect_Delay=1000
@@ -33,6 +33,7 @@ Mail_Body=See attachment for the employee data warnings.
 SFTP_Max_Reconnects=3
 Location_ext=
 SuccessFactors_sfapi_Timeout=1
-SuccessFactors_Credential=SSFF_Exaserv_One_Test
+SuccessFactors_Credential=SSFF_Vistaprint_Test
 AD_Webservice_Query=
-Need_Initial_ext=yes
+Debugging_ext=YES
+Need_Initial_ext=no

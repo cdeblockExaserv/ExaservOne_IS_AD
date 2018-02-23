@@ -81,12 +81,6 @@
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
-							<xs:element name="ManagerName" minOccurs="0">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
 							<xs:element name="ContingentWorkorderName" minOccurs="0">
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
@@ -111,12 +105,6 @@
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
-							<xs:element name="FunctionName" minOccurs="0">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
 							<xs:element name="FunctionCode" minOccurs="0">
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
@@ -130,12 +118,6 @@
 								</xs:simpleType>
 							</xs:element>
 							<xs:element name="EmploymentType" minOccurs="0">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-							<xs:element name="LocationDescription" minOccurs="0">
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
 									</xs:restriction>

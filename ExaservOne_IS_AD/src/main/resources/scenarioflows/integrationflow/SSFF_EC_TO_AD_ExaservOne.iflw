@@ -56,7 +56,6 @@
     </bpmn2:participant>
     <bpmn2:participant id="Participant_3" ifl:type="IntegrationProcess" name="Event from Intelligent Services" processRef="Process_1"/>
     <bpmn2:participant id="_Participant_2" ifl:type="IntegrationProcess" name="Manual connect to EC (Delta)" processRef="Process_2"/>
-    <bpmn2:participant id="Participant_4" ifl:type="EndpointRecevier" name="Receiver1"/>
     <bpmn2:participant id="Participant_5" ifl:type="EndpointRecevier" name="SFTP"/>
     <bpmn2:participant id="Participant_7" ifl:type="EndpointRecevier" name="SF_SFAPI"/>
     <bpmn2:participant id="Participant_6" ifl:type="EndpointRecevier" name="AD_Webservice"/>
@@ -64,8 +63,7 @@
     <bpmn2:participant id="_Participant_4" ifl:type="IntegrationProcess" name="Employee Data Warning" processRef="Process_5"/>
     <bpmn2:participant id="Participant_9" ifl:type="EndpointRecevier" name="EmployeeDataWarning_top50"/>
     <bpmn2:participant id="Participant_10" ifl:type="EndpointRecevier" name="EmployeeDataWarning"/>
-    <bpmn2:participant id="_Participant_5" ifl:type="IntegrationProcess" name="Process Data" processRef="Process_4"/>
-    <bpmn2:participant id="_Participant_7" ifl:type="IntegrationProcess" name="Include Future Hires" processRef="Process_7"/>
+    <bpmn2:participant id="_Participant_5" ifl:type="IntegrationProcess" name="Create Mapping" processRef="Process_4"/>
     <bpmn2:messageFlow id="MessageFlow_1" name="" sourceRef="Participant_1" targetRef="StartEvent_1">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -128,131 +126,6 @@
         <ifl:property>
           <key>xsrfProtection</key>
           <value>0</value>
-        </ifl:property>
-      </bpmn2:extensionElements>
-    </bpmn2:messageFlow>
-    <bpmn2:messageFlow id="MessageFlow_3" sourceRef="EndEvent_1" targetRef="Participant_4">
-      <bpmn2:extensionElements>
-        <ifl:property>
-          <key>Name</key>
-        </ifl:property>
-        <ifl:property>
-          <key>Description</key>
-        </ifl:property>
-        <ifl:property>
-          <key>ComponentType</key>
-          <value>SFTP</value>
-        </ifl:property>
-        <ifl:property>
-          <key>TransportProtocol</key>
-          <value>SFTP</value>
-        </ifl:property>
-        <ifl:property>
-          <key>TransportProtocolVersion</key>
-          <value>1.2.1</value>
-        </ifl:property>
-        <ifl:property>
-          <key>MessageProtocol</key>
-          <value>File</value>
-        </ifl:property>
-        <ifl:property>
-          <key>MessageProtocolVersion</key>
-          <value>1.3.0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>componentVersion</key>
-          <value>1.3</value>
-        </ifl:property>
-        <ifl:property>
-          <key>ComponentNS</key>
-          <value>sap</value>
-        </ifl:property>
-        <ifl:property>
-          <key>ComponentSWCVId</key>
-          <value>1.3.0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>ComponentSWCVName</key>
-          <value>1.3.0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>Vendor</key>
-        </ifl:property>
-        <ifl:property>
-          <key>path</key>
-          <value>/Backups/fromSF/QAS/IntegrationCenter</value>
-        </ifl:property>
-        <ifl:property>
-          <key>fileName</key>
-          <value>output.txt</value>
-        </ifl:property>
-        <ifl:property>
-          <key>fileAppendTimeStamp</key>
-          <value>0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>host</key>
-          <value>sftp.systemax.com</value>
-        </ifl:property>
-        <ifl:property>
-          <key>authentication</key>
-          <value>user_password</value>
-        </ifl:property>
-        <ifl:property>
-          <key>credential_name</key>
-          <value>systemax_sftp</value>
-        </ifl:property>
-        <ifl:property>
-          <key>username</key>
-          <value></value>
-        </ifl:property>
-        <ifl:property>
-          <key>connectTimeout</key>
-          <value>10000</value>
-        </ifl:property>
-        <ifl:property>
-          <key>maximumReconnectAttempts</key>
-          <value>3</value>
-        </ifl:property>
-        <ifl:property>
-          <key>reconnectDelay</key>
-          <value>1000</value>
-        </ifl:property>
-        <ifl:property>
-          <key>disconnect</key>
-          <value>1</value>
-        </ifl:property>
-        <ifl:property>
-          <key>stepwise</key>
-          <value>1</value>
-        </ifl:property>
-        <ifl:property>
-          <key>autoCreate</key>
-          <value>1</value>
-        </ifl:property>
-        <ifl:property>
-          <key>fileExist</key>
-          <value>Override</value>
-        </ifl:property>
-        <ifl:property>
-          <key>useTempFile</key>
-          <value>0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>tempFileName</key>
-          <value>${file:name}.tmp</value>
-        </ifl:property>
-        <ifl:property>
-          <key>bufferSize</key>
-          <value>128</value>
-        </ifl:property>
-        <ifl:property>
-          <key>flatten</key>
-          <value>0</value>
-        </ifl:property>
-        <ifl:property>
-          <key>sftpSecEnabled</key>
-          <value>1</value>
         </ifl:property>
       </bpmn2:extensionElements>
     </bpmn2:messageFlow>
@@ -482,7 +355,7 @@
         </ifl:property>
         <ifl:property>
           <key>query</key>
-          <value>SELECT {{SuccessFactors_Query_Fields_sfapi}} FROM CompoundEmployee WHERE ${property.QueryFilter}</value>
+          <value>SELECT {{CompoundEmployee_Entities}} FROM CompoundEmployee WHERE ${property.QueryFilter}</value>
         </ifl:property>
         <ifl:property>
           <key>sfsfSoapAPIParams</key>
@@ -1108,7 +981,7 @@
         </ifl:property>
         <ifl:property>
           <key>propertyTable</key>
-          <value>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Last_Execution_Date&lt;/cell>&lt;cell id=&quot;Type&quot;>persisted variables&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>Local_ExaservOne_EC_AD_LastExecution&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>How_To_Send_To_AD&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{How_To_Send_To_AD_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Company_Territory_Code&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Company_Territory_Code_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Person_Id_External&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Person_Id_External_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Include_ContingentWorkers&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Include_ContingentWorkers_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>File_Encryption_Mode&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{File_Enryption_Mode_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Operating_Unit&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Operating_Unit_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Location&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Location_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Company&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Company_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Need_Initial&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Need_Initial_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Initial_Timestamp&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Initial_Timestamp_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Simulation_Startdate&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Simulation_Startdate_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Simulation_Enddate&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Simulation_Enddate_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row></value>
+          <value>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Last_Execution_Date&lt;/cell>&lt;cell id=&quot;Type&quot;>persisted variables&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>Local_ExaservOne_EC_AD_LastExecution&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>How_To_Send_To_AD&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{How_To_Send_To_AD_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Company_Territory_Code&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Company_Territory_Code_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Person_Id_External&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Person_Id_External_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Include_ContingentWorkers&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Include_ContingentWorkers_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>File_Encryption_Mode&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{File_Enryption_Mode_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Operating_Unit&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Operating_Unit_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Location&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Location_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Company&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Company_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Need_Initial&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Need_Initial_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Initial_Timestamp&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Initial_Timestamp_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Simulation_Startdate&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Simulation_Startdate_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Simulation_Enddate&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Simulation_Enddate_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row>&lt;row>&lt;cell id=&quot;Action&quot;>Create&lt;/cell>&lt;cell id=&quot;Name&quot;>Debugging&lt;/cell>&lt;cell id=&quot;Type&quot;>external parameter&lt;/cell>&lt;cell id=&quot;Datatype&quot;>java.lang.String&lt;/cell>&lt;cell id=&quot;Value&quot;>{{Debugging_ext}}&lt;/cell>&lt;cell id=&quot;Default&quot;>&lt;/cell>&lt;/row></value>
         </ifl:property>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
@@ -1622,29 +1495,9 @@
         </ifl:property>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_17</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_62</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="Branch B" sourceRef="ParallelGateway_1" targetRef="CallActivity_15"/>
-    <bpmn2:parallelGateway id="ParallelGateway_2" name="Sequential Multicast" gatewayDirection="Diverging">
-      <bpmn2:extensionElements>
-        <ifl:property>
-          <key>componentVersion</key>
-          <value>1.1</value>
-        </ifl:property>
-        <ifl:property>
-          <key>activityType</key>
-          <value>SequentialMulticast</value>
-        </ifl:property>
-        <ifl:property>
-          <key>routingSequenceTable</key>
-          <value>&lt;row>&lt;cell>1&lt;/cell>&lt;cell>SequenceFlow_23&lt;/cell>&lt;/row>&lt;row>&lt;cell>2&lt;/cell>&lt;cell>SequenceFlow_32&lt;/cell>&lt;/row></value>
-        </ifl:property>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_17</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_23</bpmn2:outgoing>
-      <bpmn2:outgoing>SequenceFlow_32</bpmn2:outgoing>
-    </bpmn2:parallelGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_17" sourceRef="CallActivity_15" targetRef="ParallelGateway_2"/>
     <bpmn2:callActivity id="CallActivity_17" name="Filter">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -1657,13 +1510,12 @@
         </ifl:property>
         <ifl:property>
           <key>wrapContent</key>
-          <value>/queryCompoundEmployeeResponse/CompoundEmployee[person/employment_information/start_date&lt;=$currentDate]</value>
+          <value>/queryCompoundEmployeeResponse/CompoundEmployee[person/employment_information/start_date&lt;=$Current_Date]</value>
         </ifl:property>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_23</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_63</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_30</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_23" name="Branch A" sourceRef="ParallelGateway_2" targetRef="CallActivity_17"/>
     <bpmn2:callActivity id="CallActivity_18" name="Content Modifier">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -1697,36 +1549,9 @@ ${in.body}&#xD;
         </ifl:property>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_31</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_39</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_64</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_31" sourceRef="CallActivity_18" targetRef="CallActivity_19"/>
-    <bpmn2:parallelGateway id="ParallelGateway_3" name="Join" gatewayDirection="Converging">
-      <bpmn2:extensionElements>
-        <ifl:property>
-          <key>activityType</key>
-          <value>Join</value>
-        </ifl:property>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_38</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
-    </bpmn2:parallelGateway>
-    <bpmn2:callActivity id="CallActivity_20" name="Process Call">
-      <bpmn2:extensionElements>
-        <ifl:property>
-          <key>activityType</key>
-          <value>ProcessCallElement</value>
-        </ifl:property>
-        <ifl:property>
-          <key>processId</key>
-          <value>Process_7</value>
-        </ifl:property>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_32</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_38</bpmn2:outgoing>
-    </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_32" name="Branch B" sourceRef="ParallelGateway_2" targetRef="CallActivity_20"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_38" sourceRef="CallActivity_20" targetRef="ParallelGateway_3"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_39" sourceRef="CallActivity_19" targetRef="ParallelGateway_3"/>
     <bpmn2:callActivity id="CallActivity_22" name="log01bis">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -1746,6 +1571,41 @@ ${in.body}&#xD;
       <bpmn2:outgoing>SequenceFlow_37</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_44" sourceRef="CallActivity_16" targetRef="CallActivity_22"/>
+    <bpmn2:endEvent id="EndEvent_13" name="End Event 13">
+      <bpmn2:incoming>SequenceFlow_65</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:parallelGateway id="ParallelGateway_5" name="Sequential Multicast" gatewayDirection="Diverging">
+      <bpmn2:extensionElements>
+        <ifl:property>
+          <key>componentVersion</key>
+          <value>1.1</value>
+        </ifl:property>
+        <ifl:property>
+          <key>activityType</key>
+          <value>SequentialMulticast</value>
+        </ifl:property>
+        <ifl:property>
+          <key>routingSequenceTable</key>
+          <value>&lt;row>&lt;cell>1&lt;/cell>&lt;cell>SequenceFlow_63&lt;/cell>&lt;/row></value>
+        </ifl:property>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_62</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_63</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_62" sourceRef="CallActivity_15" targetRef="ParallelGateway_5"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_63" name="Branch A" sourceRef="ParallelGateway_5" targetRef="CallActivity_17"/>
+    <bpmn2:parallelGateway id="ParallelGateway_6" name="Join">
+      <bpmn2:extensionElements>
+        <ifl:property>
+          <key>activityType</key>
+          <value>Join</value>
+        </ifl:property>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_64</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_65</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_64" sourceRef="CallActivity_19" targetRef="ParallelGateway_6"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_65" sourceRef="ParallelGateway_6" targetRef="EndEvent_13"/>
   </bpmn2:process>
   <bpmn2:process id="Process_3" name="Process 3" isExecutable="false">
     <bpmn2:extensionElements>
@@ -1863,7 +1723,7 @@ ${in.body}&#xD;
       </ifl:property>
     </bpmn2:extensionElements>
     <bpmn2:startEvent id="StartEvent_5" name="Start">
-      <bpmn2:outgoing>SequenceFlow_41</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_58</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_6" name="Router" gatewayDirection="Diverging" default="SequenceFlow_42">
       <bpmn2:extensionElements>
@@ -1876,11 +1736,10 @@ ${in.body}&#xD;
           <value>true</value>
         </ifl:property>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_41</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_59</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
-      <bpmn2:outgoing>SequenceFlow_46</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_60</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_41" sourceRef="StartEvent_5" targetRef="ExclusiveGateway_6"/>
     <bpmn2:endEvent id="EndEvent_12" name="End Event 12">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
     </bpmn2:endEvent>
@@ -1900,18 +1759,9 @@ ${in.body}&#xD;
           <value>log02</value>
         </ifl:property>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_46</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_49</bpmn2:outgoing>
+      <bpmn2:incoming>SequenceFlow_58</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_59</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_46" sourceRef="ExclusiveGateway_6" targetRef="CallActivity_24">
-      <bpmn2:extensionElements>
-        <ifl:property>
-          <key>expressionType</key>
-          <value>XML</value>
-        </ifl:property>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_FormalExpression_319">count(/queryCompoundEmployeeResponse/CompoundEmployee) > 0</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:callActivity id="CallActivity_25" name="Message Mapping">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -1938,10 +1788,9 @@ ${in.body}&#xD;
           <key>bundle-name</key>
         </ifl:property>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_49</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_60</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_50</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_49" sourceRef="CallActivity_24" targetRef="CallActivity_25"/>
     <bpmn2:callActivity id="CallActivity_26" name="log03">
       <bpmn2:extensionElements>
         <ifl:property>
@@ -1965,37 +1814,17 @@ ${in.body}&#xD;
       <bpmn2:incoming>SequenceFlow_51</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_51" sourceRef="CallActivity_26" targetRef="EndEvent_14"/>
-  </bpmn2:process>
-  <bpmn2:process id="Process_7" name="Process 7" isExecutable="false">
-    <bpmn2:extensionElements>
-      <ifl:property>
-        <key>componentVersion</key>
-        <value>1.1</value>
-      </ifl:property>
-      <ifl:property>
-        <key>transactionalHandling</key>
-        <value>From Calling Process</value>
-      </ifl:property>
-      <ifl:property>
-        <key>transactionTimeout</key>
-        <value>30</value>
-      </ifl:property>
-      <ifl:property>
-        <key>cmdVariantUri</key>
-        <value>ctype::FlowElementVariant/cname::LocalIntegrationProcess/version::1.1.2</value>
-      </ifl:property>
-      <ifl:property>
-        <key>processType</key>
-        <value>directCall</value>
-      </ifl:property>
-    </bpmn2:extensionElements>
-    <bpmn2:startEvent id="StartEvent_7" name="Start">
-      <bpmn2:outgoing>SequenceFlow_52</bpmn2:outgoing>
-    </bpmn2:startEvent>
-    <bpmn2:endEvent id="EndEvent_15" name="End">
-      <bpmn2:incoming>SequenceFlow_52</bpmn2:incoming>
-    </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_52" sourceRef="StartEvent_7" targetRef="EndEvent_15"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_58" sourceRef="StartEvent_5" targetRef="CallActivity_24"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_59" sourceRef="CallActivity_24" targetRef="ExclusiveGateway_6"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_60" sourceRef="ExclusiveGateway_6" targetRef="CallActivity_25">
+      <bpmn2:extensionElements>
+        <ifl:property>
+          <key>expressionType</key>
+          <value>XML</value>
+        </ifl:property>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_FormalExpression_320">count(/queryCompoundEmployeeResponse/CompoundEmployee) > 0</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
@@ -2015,12 +1844,6 @@ ${in.body}&#xD;
         <dc:Bounds height="1290.0" width="1441.0" x="250.0" y="331.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_12">
           <dc:Bounds height="17.0" width="191.0" x="875.0" y="334.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_5" bpmnElement="Participant_4" isHorizontal="false">
-        <dc:Bounds height="140.0" width="100.0" x="909.0" y="109.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_18">
-          <dc:Bounds height="17.0" width="66.0" x="926.0" y="112.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Participant_6" bpmnElement="Participant_5" isHorizontal="false">
@@ -2066,15 +1889,9 @@ ${in.body}&#xD;
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Participant_2" bpmnElement="_Participant_5" isHorizontal="false">
-        <dc:Bounds height="401.0" width="793.0" x="2178.0" y="1258.0"/>
+        <dc:Bounds height="401.0" width="793.0" x="2177.0" y="870.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_102">
-          <dc:Bounds height="17.0" width="90.0" x="2529.0" y="1261.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_14" bpmnElement="_Participant_7" isHorizontal="false">
-        <dc:Bounds height="220.0" width="540.0" x="2180.0" y="902.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_121">
-          <dc:Bounds height="17.0" width="130.0" x="2385.0" y="905.0"/>
+          <dc:Bounds height="17.0" width="102.0" x="2522.0" y="873.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
@@ -2299,12 +2116,6 @@ ${in.body}&#xD;
           <dc:Bounds height="17.0" width="105.0" x="594.0" y="859.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_2" bpmnElement="ParallelGateway_2" isMarkerVisible="true">
-        <dc:Bounds height="36.0" width="36.0" x="749.0" y="850.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_89">
-          <dc:Bounds height="34.0" width="76.0" x="729.0" y="886.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_17" bpmnElement="CallActivity_17" isExpanded="true">
         <dc:Bounds height="60.0" width="100.0" x="861.0" y="838.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_91">
@@ -2323,34 +2134,22 @@ ${in.body}&#xD;
           <dc:Bounds height="17.0" width="84.0" x="1168.0" y="859.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_3" bpmnElement="ParallelGateway_3" isMarkerVisible="true">
-        <dc:Bounds height="36.0" width="36.0" x="1307.0" y="850.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_97">
-          <dc:Bounds height="17.0" width="26.0" x="1312.0" y="886.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_CallActivity_20" bpmnElement="CallActivity_20" isExpanded="true">
-        <dc:Bounds height="60.0" width="100.0" x="1010.0" y="940.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_98">
-          <dc:Bounds height="17.0" width="84.0" x="1018.0" y="961.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_5" bpmnElement="StartEvent_5">
-        <dc:Bounds height="36.0" width="36.0" x="2200.0" y="1349.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="2199.0" y="961.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_103">
-          <dc:Bounds height="17.0" width="31.0" x="2202.0" y="1385.0"/>
+          <dc:Bounds height="17.0" width="31.0" x="2201.0" y="997.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_6" bpmnElement="ExclusiveGateway_6" isMarkerVisible="true">
-        <dc:Bounds height="36.0" width="36.0" x="2290.0" y="1349.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="2486.0" y="961.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_104">
-          <dc:Bounds height="17.0" width="44.0" x="2286.0" y="1385.0"/>
+          <dc:Bounds height="17.0" width="44.0" x="2482.0" y="997.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_12" bpmnElement="EndEvent_12">
-        <dc:Bounds height="36.0" width="36.0" x="2401.0" y="1349.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="2639.0" y="961.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_106">
-          <dc:Bounds height="34.0" width="75.0" x="2382.0" y="1385.0"/>
+          <dc:Bounds height="34.0" width="75.0" x="2620.0" y="997.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_22" bpmnElement="CallActivity_22" isExpanded="true">
@@ -2360,39 +2159,45 @@ ${in.body}&#xD;
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_24" bpmnElement="CallActivity_24" isExpanded="true">
-        <dc:Bounds height="60.0" width="100.0" x="2258.0" y="1435.0"/>
+        <dc:Bounds height="60.0" width="100.0" x="2309.0" y="949.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_112">
-          <dc:Bounds height="17.0" width="35.0" x="2290.0" y="1456.0"/>
+          <dc:Bounds height="17.0" width="35.0" x="2341.0" y="970.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_25" bpmnElement="CallActivity_25" isExpanded="true">
-        <dc:Bounds height="60.0" width="100.0" x="2258.0" y="1538.0"/>
+        <dc:Bounds height="60.0" width="100.0" x="2454.0" y="1106.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_115">
-          <dc:Bounds height="17.0" width="93.0" x="2261.0" y="1559.0"/>
+          <dc:Bounds height="17.0" width="93.0" x="2457.0" y="1127.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_26" bpmnElement="CallActivity_26" isExpanded="true">
-        <dc:Bounds height="60.0" width="100.0" x="2401.0" y="1538.0"/>
+        <dc:Bounds height="60.0" width="100.0" x="2597.0" y="1106.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_117">
-          <dc:Bounds height="17.0" width="35.0" x="2433.0" y="1559.0"/>
+          <dc:Bounds height="17.0" width="35.0" x="2629.0" y="1127.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_14" bpmnElement="EndEvent_14">
-        <dc:Bounds height="36.0" width="36.0" x="2551.0" y="1550.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="2747.0" y="1118.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_119">
-          <dc:Bounds height="34.0" width="75.0" x="2532.0" y="1586.0"/>
+          <dc:Bounds height="34.0" width="75.0" x="2728.0" y="1154.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_StartEvent_7" bpmnElement="StartEvent_7">
-        <dc:Bounds height="36.0" width="36.0" x="2202.0" y="993.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_122">
-          <dc:Bounds height="17.0" width="31.0" x="2204.0" y="1029.0"/>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_13" bpmnElement="EndEvent_13">
+        <dc:Bounds height="36.0" width="36.0" x="1541.0" y="850.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_108">
+          <dc:Bounds height="34.0" width="75.0" x="1522.0" y="886.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_15" bpmnElement="EndEvent_15">
-        <dc:Bounds height="36.0" width="36.0" x="2667.0" y="993.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_123">
-          <dc:Bounds height="17.0" width="26.0" x="2672.0" y="1029.0"/>
+      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_5" bpmnElement="ParallelGateway_5" isMarkerVisible="true">
+        <dc:Bounds height="36.0" width="36.0" x="770.0" y="850.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_135">
+          <dc:Bounds height="34.0" width="76.0" x="750.0" y="886.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_6" bpmnElement="ParallelGateway_6" isMarkerVisible="true">
+        <dc:Bounds height="36.0" width="36.0" x="1312.0" y="850.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_138">
+          <dc:Bounds height="17.0" width="26.0" x="1317.0" y="886.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_EndEvent_1">
@@ -2405,14 +2210,6 @@ ${in.body}&#xD;
         <di:waypoint xsi:type="dc:Point" x="270.0" y="168.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_7">
           <dc:Bounds height="17.0" width="48.0" x="182.0" y="170.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_3" bpmnElement="MessageFlow_3" sourceElement="BPMNShape_EndEvent_1" targetElement="BPMNShape_Participant_5">
-        <di:waypoint xsi:type="dc:Point" x="772.0" y="168.0"/>
-        <di:waypoint xsi:type="dc:Point" x="840.0" y="168.0"/>
-        <di:waypoint xsi:type="dc:Point" x="909.0" y="168.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_20">
-          <dc:Bounds height="17.0" width="38.0" x="823.0" y="169.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_4" bpmnElement="MessageFlow_4" sourceElement="BPMNShape_EndEvent_9" targetElement="BPMNShape_Participant_6">
@@ -2672,20 +2469,6 @@ ${in.body}&#xD;
           <dc:Bounds height="34.0" width="73.0" x="502.0" y="872.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_17" bpmnElement="SequenceFlow_17" sourceElement="BPMNShape_CallActivity_15" targetElement="BPMNShape_ParallelGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="707.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="728.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="749.0" y="868.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_90"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_23" bpmnElement="SequenceFlow_23" sourceElement="BPMNShape_ParallelGateway_2" targetElement="BPMNShape_CallActivity_17">
-        <di:waypoint xsi:type="dc:Point" x="785.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="823.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="861.0" y="868.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_92">
-          <dc:Bounds height="34.0" width="72.0" x="788.0" y="869.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_30" bpmnElement="SequenceFlow_30" sourceElement="BPMNShape_CallActivity_17" targetElement="BPMNShape_CallActivity_18">
         <di:waypoint xsi:type="dc:Point" x="961.0" y="868.0"/>
         <di:waypoint xsi:type="dc:Point" x="980.0" y="868.0"/>
@@ -2698,38 +2481,12 @@ ${in.body}&#xD;
         <di:waypoint xsi:type="dc:Point" x="1160.0" y="868.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_96"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_32" bpmnElement="SequenceFlow_32" sourceElement="BPMNShape_ParallelGateway_2" targetElement="BPMNShape_CallActivity_20">
-        <di:waypoint xsi:type="dc:Point" x="767.0" y="886.0"/>
-        <di:waypoint xsi:type="dc:Point" x="767.0" y="970.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1010.0" y="970.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_99">
-          <dc:Bounds height="34.0" width="73.0" x="811.0" y="971.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_38" bpmnElement="SequenceFlow_38" sourceElement="BPMNShape_CallActivity_20" targetElement="BPMNShape_ParallelGateway_3">
-        <di:waypoint xsi:type="dc:Point" x="1110.0" y="970.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1325.0" y="970.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1325.0" y="886.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_100"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_39" bpmnElement="SequenceFlow_39" sourceElement="BPMNShape_CallActivity_19" targetElement="BPMNShape_ParallelGateway_3">
-        <di:waypoint xsi:type="dc:Point" x="1260.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1283.0" y="868.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1307.0" y="868.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_101"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_41" bpmnElement="SequenceFlow_41" sourceElement="BPMNShape_StartEvent_5" targetElement="BPMNShape_ExclusiveGateway_6">
-        <di:waypoint xsi:type="dc:Point" x="2236.0" y="1367.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2263.0" y="1367.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2290.0" y="1367.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_105"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_42" bpmnElement="SequenceFlow_42" sourceElement="BPMNShape_ExclusiveGateway_6" targetElement="BPMNShape_EndEvent_12">
-        <di:waypoint xsi:type="dc:Point" x="2326.0" y="1367.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2363.0" y="1367.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2401.0" y="1367.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2522.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2580.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2639.0" y="979.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_107">
-          <dc:Bounds height="17.0" width="70.0" x="2330.0" y="1368.0"/>
+          <dc:Bounds height="17.0" width="70.0" x="2547.0" y="980.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_44" bpmnElement="SequenceFlow_44" sourceElement="BPMNShape_CallActivity_16" targetElement="BPMNShape_CallActivity_22">
@@ -2738,35 +2495,61 @@ ${in.body}&#xD;
         <di:waypoint xsi:type="dc:Point" x="1023.0" y="1384.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_111"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_46" bpmnElement="SequenceFlow_46" sourceElement="BPMNShape_ExclusiveGateway_6" targetElement="BPMNShape_CallActivity_24">
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1385.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1410.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1435.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_113"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_49" bpmnElement="SequenceFlow_49" sourceElement="BPMNShape_CallActivity_24" targetElement="BPMNShape_CallActivity_25">
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1495.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1516.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2308.0" y="1538.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_116"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_50" bpmnElement="SequenceFlow_50" sourceElement="BPMNShape_CallActivity_25" targetElement="BPMNShape_CallActivity_26">
-        <di:waypoint xsi:type="dc:Point" x="2358.0" y="1568.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2379.0" y="1568.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2401.0" y="1568.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2554.0" y="1136.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2575.0" y="1136.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2597.0" y="1136.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_118"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_51" bpmnElement="SequenceFlow_51" sourceElement="BPMNShape_CallActivity_26" targetElement="BPMNShape_EndEvent_14">
-        <di:waypoint xsi:type="dc:Point" x="2501.0" y="1568.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2526.0" y="1568.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2551.0" y="1568.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2697.0" y="1136.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2722.0" y="1136.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2747.0" y="1136.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_120"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_52" bpmnElement="SequenceFlow_52" sourceElement="BPMNShape_StartEvent_7" targetElement="BPMNShape_EndEvent_15">
-        <di:waypoint xsi:type="dc:Point" x="2238.0" y="1011.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2452.0" y="1011.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2667.0" y="1011.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_124"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_58" bpmnElement="SequenceFlow_58" sourceElement="BPMNShape_StartEvent_5" targetElement="BPMNShape_CallActivity_24">
+        <di:waypoint xsi:type="dc:Point" x="2235.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2272.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2309.0" y="979.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_132"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_59" bpmnElement="SequenceFlow_59" sourceElement="BPMNShape_CallActivity_24" targetElement="BPMNShape_ExclusiveGateway_6">
+        <di:waypoint xsi:type="dc:Point" x="2409.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2447.0" y="979.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2486.0" y="979.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_133"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_60" bpmnElement="SequenceFlow_60" sourceElement="BPMNShape_ExclusiveGateway_6" targetElement="BPMNShape_CallActivity_25">
+        <di:waypoint xsi:type="dc:Point" x="2504.0" y="997.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2504.0" y="1051.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2504.0" y="1106.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_134"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_62" bpmnElement="SequenceFlow_62" sourceElement="BPMNShape_CallActivity_15" targetElement="BPMNShape_ParallelGateway_5">
+        <di:waypoint xsi:type="dc:Point" x="707.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="738.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="770.0" y="868.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_136"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_63" bpmnElement="SequenceFlow_63" sourceElement="BPMNShape_ParallelGateway_5" targetElement="BPMNShape_CallActivity_17">
+        <di:waypoint xsi:type="dc:Point" x="806.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="833.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="861.0" y="868.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_137">
+          <dc:Bounds height="34.0" width="72.0" x="799.0" y="869.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_64" bpmnElement="SequenceFlow_64" sourceElement="BPMNShape_CallActivity_19" targetElement="BPMNShape_ParallelGateway_6">
+        <di:waypoint xsi:type="dc:Point" x="1260.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1286.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1312.0" y="868.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_65" bpmnElement="SequenceFlow_65" sourceElement="BPMNShape_ParallelGateway_6" targetElement="BPMNShape_EndEvent_13">
+        <di:waypoint xsi:type="dc:Point" x="1348.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1444.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1541.0" y="868.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_140"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

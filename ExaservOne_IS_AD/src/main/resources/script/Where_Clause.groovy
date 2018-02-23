@@ -44,6 +44,7 @@ def Message processData(Message message) {
 	def Company_ext = pMap.get("Company");
 	def Include_ContingentWorkers_ext = pMap.get("Include_ContingentWorkers");
 	def Simulation_Enddate_ext = pMap.get("Simulation_Enddate");
+	def Simulation_Startdate_ext = pMap.get("Simulation_Startdate");
 	def Last_Execution_Date_ext = pMap.get("Last_Execution_Date");
 	
 	DateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
@@ -59,10 +60,10 @@ def Message processData(Message message) {
 	}	
 	if(!(Simulation_Startdate_ext.trim().isEmpty()))
 	{
-		str.append("and last_modified_on > to_date('" + dateFormat.format(Simulation_Startdate_ext) + "') ");
+		str.append("and last_modified_on > to_datetime('" + Simulation_Startdate_ext + "') ");
 	}else
 	{
-		str.append("and last_modified_on > to_date('" + dateFormat.format(Last_Execution_Date_ext) + "') ");
+		str.append("and last_modified_on > to_datetime('" + Last_Execution_Date_ext + "') ");
 	}
 	if(!(Company_Territory_Code_ext.trim().isEmpty()))
 	{
