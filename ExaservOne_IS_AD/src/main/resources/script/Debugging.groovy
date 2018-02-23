@@ -10,19 +10,20 @@ import java.io.StringWriter; // TO FORMAT XML IN DEBUGGER
 import javax.xml.transform.stream.StreamSource; // TO FORMAT XML IN DEBUGGER
 import javax.xml.transform.OutputKeys; // TO FORMAT XML IN DEBUGGER
 
-def Message log01(Message message) {processData("log01_First50_Warnings", message,"txt",true);}
-def Message log01bis(Message message) {processData("log01bis_Data_Warnings", message,"txt",true);}
-def Message log02(Message message) {processData("log02_CompoundEmployees_NoFutureHires", message,"txt",true);}
-def Message log03(Message message) {processData("log03_CompoundEmployees_After_Mapping", message,"XML",true);}
-def Message log04(Message message) {processData("log04_XML_Before_UserMapping", message,"XML",true);}
-def Message log05(Message message) {processData("log05_XML_after_upsert", message,"txt",true);}
-def Message log06(Message message) {processData("log06_User_ERROR_Responses", message,"txt",true);}
-def Message log07(Message message) {processData("log07_Email_ERROR_Responses", message,"txt",true);}
-def Message log08(Message message) {processData("log08_ERROR_PlainText", message, "txt",true);}
-def Message log09(Message message) {processData("log09_XML_After_ContentEnricher", message,"txt",true);}
-def Message log10(Message message) {processData("log10_UserUpsertResponse", message,"txt",true);}
-def Message log11(Message message) {processData("log11_XML_before_Warning_Mapping", message,"txt",true);}
-def Message log12(Message message) {processData("log12_XML_After_Filter", message,"txt",true);}
+def Message log01(Message message) {processData("log01_QueryCompoundEmployeeResponse", message,"txt",true);}
+def Message log02(Message message) {processData("log02_First50_Warnings", message,"txt",true);}
+def Message log02bis(Message message) {processData("log02bis_Data_Warnings", message,"txt",true);}
+def Message log03(Message message) {processData("log03_CompoundEmployees_NoFutureHires", message,"txt",true);}
+def Message log04(Message message) {processData("log04_CompoundEmployees_After_Mapping", message,"XML",true);}
+def Message log05(Message message) {processData("log05_CompoundEmployees_FutureHires", message,"XML",true);}
+def Message log06(Message message) {processData("log06_CompoundEmployees_FutureHires_After_Mapping", message,"txt",true);}
+def Message log07(Message message) {processData("log07_CompoundEmployees_Combined", message,"txt",true);}
+def Message log08(Message message) {processData("log08_Email_ERROR_Responses", message,"txt",true);}
+def Message log09(Message message) {processData("log09_ERROR_PlainText", message, "txt",true);}
+def Message log10(Message message) {processData("log10_XML_After_ContentEnricher", message,"txt",true);}
+def Message log11(Message message) {processData("log11_UserUpsertResponse", message,"txt",true);}
+def Message log12(Message message) {processData("log12_XML_before_Warning_Mapping", message,"txt",true);}
+def Message log13(Message message) {processData("log13_XML_After_Filter", message,"txt",true);}
 
 def Message processData(String prefix, Message message, String contentType, boolean enable) {
 	def headers = message.getHeaders();
