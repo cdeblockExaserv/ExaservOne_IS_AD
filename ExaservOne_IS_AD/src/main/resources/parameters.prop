@@ -1,5 +1,5 @@
 #Parameter data and values
-#Mon Feb 26 16:21:52 CET 2018
+#Mon Feb 26 16:24:16 CET 2018
 SFTP_Address=sftp.example.com
 SFTP_Timeout=10000
 AD_Webservice_Address=https\://example.com
@@ -34,7 +34,7 @@ Mail_Body=See attachment for the employee data warnings.
 SFTP_Max_Reconnects=3
 Location_ext=
 SuccessFactors_sfapi_Timeout=1
-AD_Webservice_Query=
 SuccessFactors_Credential=SSFF_Vistaprint_Test
+AD_Webservice_Query=
 Debugging_ext=YES
 Need_Initial_ext=no

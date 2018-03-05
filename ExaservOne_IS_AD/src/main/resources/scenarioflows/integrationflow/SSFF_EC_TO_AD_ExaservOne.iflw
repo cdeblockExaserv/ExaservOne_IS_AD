@@ -1706,7 +1706,7 @@
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_44" sourceRef="CallActivity_16" targetRef="CallActivity_22"/>
     <bpmn2:endEvent id="EndEvent_13" name="End Event 13">
-      <bpmn2:incoming>SequenceFlow_105</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_25</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:parallelGateway id="ParallelGateway_5" name="Sequential Multicast" gatewayDirection="Diverging">
       <bpmn2:extensionElements>
@@ -1934,10 +1934,25 @@
         </ifl:property>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_104</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_105</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_22</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_104" sourceRef="CallActivity_37" targetRef="CallActivity_50"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_105" sourceRef="CallActivity_50" targetRef="EndEvent_13"/>
+    <bpmn2:callActivity id="CallActivity_52" name="Process Call">
+      <bpmn2:extensionElements>
+        <ifl:property>
+          <key>activityType</key>
+          <value>ProcessCallElement</value>
+        </ifl:property>
+        <ifl:property>
+          <key>processId</key>
+          <value>Process_6</value>
+        </ifl:property>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_22</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
+    </bpmn2:callActivity>
+    <bpmn2:sequenceFlow id="SequenceFlow_22" sourceRef="CallActivity_50" targetRef="CallActivity_52"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_25" sourceRef="CallActivity_52" targetRef="EndEvent_13"/>
   </bpmn2:process>
   <bpmn2:process id="Process_3" name="Process 3" isExecutable="false">
     <bpmn2:extensionElements>
@@ -3323,9 +3338,9 @@ ${exception.message}</value>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_13" bpmnElement="EndEvent_13">
-        <dc:Bounds height="36.0" width="36.0" x="1850.0" y="870.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1960.0" y="870.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_108">
-          <dc:Bounds height="34.0" width="75.0" x="1831.0" y="906.0"/>
+          <dc:Bounds height="34.0" width="75.0" x="1941.0" y="906.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_5" bpmnElement="ParallelGateway_5" isMarkerVisible="true">
@@ -3611,9 +3626,9 @@ ${exception.message}</value>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_50" bpmnElement="CallActivity_50" isExpanded="true">
-        <dc:Bounds height="60.0" width="100.0" x="1697.0" y="858.0"/>
+        <dc:Bounds height="60.0" width="100.0" x="1689.0" y="858.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_229">
-          <dc:Bounds height="17.0" width="84.0" x="1705.0" y="879.0"/>
+          <dc:Bounds height="17.0" width="84.0" x="1697.0" y="879.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_CallActivity_18" bpmnElement="CallActivity_18" isExpanded="true">
@@ -3722,6 +3737,12 @@ ${exception.message}</value>
         <dc:Bounds height="60.0" width="100.0" x="2955.0" y="2501.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_19">
           <dc:Bounds height="34.0" width="99.0" x="2955.0" y="2514.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_CallActivity_52" bpmnElement="CallActivity_52" isExpanded="true">
+        <dc:Bounds height="60.0" width="100.0" x="1820.0" y="858.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_52">
+          <dc:Bounds height="17.0" width="84.0" x="1828.0" y="879.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_1" bpmnElement="MessageFlow_1" sourceElement="BPMNShape_Participant_1" targetElement="BPMNShape_StartEvent_1">
@@ -4258,15 +4279,9 @@ ${exception.message}</value>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_104" bpmnElement="SequenceFlow_104" sourceElement="BPMNShape_CallActivity_37" targetElement="BPMNShape_CallActivity_50">
         <di:waypoint xsi:type="dc:Point" x="1639.0" y="888.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1668.0" y="888.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1697.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1664.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1689.0" y="888.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_230"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_105" bpmnElement="SequenceFlow_105" sourceElement="BPMNShape_CallActivity_50" targetElement="BPMNShape_EndEvent_13">
-        <di:waypoint xsi:type="dc:Point" x="1797.0" y="888.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1823.0" y="888.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1850.0" y="888.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_231"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_30" bpmnElement="SequenceFlow_30" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_CallActivity_18">
         <di:waypoint xsi:type="dc:Point" x="306.0" y="108.0"/>
@@ -4398,6 +4413,18 @@ ${exception.message}</value>
         <di:waypoint xsi:type="dc:Point" x="3112.0" y="2531.0"/>
         <di:waypoint xsi:type="dc:Point" x="3170.0" y="2531.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_39"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_22" bpmnElement="SequenceFlow_22" sourceElement="BPMNShape_CallActivity_50" targetElement="BPMNShape_CallActivity_52">
+        <di:waypoint xsi:type="dc:Point" x="1789.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1804.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1820.0" y="888.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_53"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_25" bpmnElement="SequenceFlow_25" sourceElement="BPMNShape_CallActivity_52" targetElement="BPMNShape_EndEvent_13">
+        <di:waypoint xsi:type="dc:Point" x="1920.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1940.0" y="888.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1960.0" y="888.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_54"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
