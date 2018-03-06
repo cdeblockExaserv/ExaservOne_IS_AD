@@ -18,9 +18,9 @@ def Message log04(Message message) {processData("log04_CompoundEmployees_After_M
 def Message log05(Message message) {processData("log05_CompoundEmployees_FutureHires", message,"XML",true);}
 def Message log06(Message message) {processData("log06_CompoundEmployees_FutureHires_After_Mapping", message,"txt",true);}
 def Message log07(Message message) {processData("log07_CompoundEmployees_Combined", message,"txt",true);}
-def Message log08(Message message) {processData("log08_Email_ERROR_Responses", message,"txt",true);}
-def Message log09(Message message) {processData("log09_ERROR_PlainText", message, "txt",true);}
-def Message log10(Message message) {processData("log10_XML_After_ContentEnricher", message,"txt",true);}
+def Message log08(Message message) {processData("log08_IS_Before_Mapping", message,"txt",true);}
+def Message log09(Message message) {processData("log09_IS_After_Mapping", message, "txt",true);}
+def Message log10(Message message) {processData("log10_XML_Outputhandling", message,"txt",true);}
 def Message log11(Message message) {processData("log11_UserUpsertResponse", message,"txt",true);}
 def Message log12(Message message) {processData("log12_XML_before_Warning_Mapping", message,"txt",true);}
 def Message log13(Message message) {processData("log13_XML_After_Filter", message,"txt",true);}

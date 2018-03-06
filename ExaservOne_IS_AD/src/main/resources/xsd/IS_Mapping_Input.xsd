@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="employees">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="employee">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PersonIDExternal" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="UserID" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FirstName" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="LastName" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="PersonalEmail" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CorporateEmail" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="HireDate" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ContingentStartDate" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OriginalStartDate" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ManagerPersonID" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ManagerUserID" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ContingentWorkorderOwnerUserID" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ContingentWorkorderName" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="PayGrade" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OperatingUnit" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CostCenterCode" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FunctionCode" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Position" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="EmploymentType" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="LocationCode" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TerminationDate" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ContigentEndDate" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
